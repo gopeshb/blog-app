@@ -6,10 +6,9 @@ import { AiOutlineSearch } from 'react-icons/ai';
 export default function Header() {
   const path=useLocation().pathname;
   return (
-    <Navbar className='border-b-2'>
-      <Link to="/" className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'>
-        <span className='px-2 py-1  text-white bg-gradient-to-r from-cyan-600 via-sky-600 to-blue-600 rounded-lg'>Bhai</span>
-        Log
+    <Navbar className='border-b-2 font-semibold'>
+      <Link to="/" className='self-center whitespace-nowrap text-sm sm:text-xl  dark:text-white'>
+        <span className='p-2  text-white bg-gradient-to-r from-cyan-600 via-sky-600 to-blue-600 font-semibold rounded-lg'>Bhai Log</span>
       </Link>
       <form >
         <TextInput type='text' placeholder='Search...' rightIcon={AiOutlineSearch} className='hidden lg:inline' />
@@ -22,7 +21,7 @@ export default function Header() {
           <FaMoon/>
         </Button>
         <Link to='/sign-in'>
-            <Button gradientDuoTone='purpleToBlue' >
+            <Button gradientDuoTone='purpleToBlue' className='font-semibold' >
               Sign In
             </Button>
           </Link>
@@ -30,13 +29,13 @@ export default function Header() {
       </div>
           <Navbar.Collapse>
             <Navbar.Link active={path==='/'} as={'div'}>
-              <Link to='/'>Home</Link>
+              <Link to='/' className='font-semibold'>Home</Link>
             </Navbar.Link>
             <Navbar.Link active={path==='/about'} as={'div'}>
-              <Link to='/about'>About</Link>
+              <Link to='/about' className='font-semibold'>About</Link>
             </Navbar.Link>
             <Navbar.Link active={path==='/projects'} as={'div'}>
-              <Link to='/projects'>Projects</Link>
+              <Link to='/projects' className='font-semibold'>Projects</Link>
             </Navbar.Link>
           </Navbar.Collapse>
     </Navbar>
