@@ -22,11 +22,11 @@ export default function Header() {
         <AiOutlineSearch />
       </Button>
       <div className='flex gap-2 md:order-2'>
-        <Button className='w-12 h-10 hidden sm:inline ' color='gray' onClick={() => dispatch(toggle())} >
+        <Button className='w-12 h-10 sm:inline ' color='gray' onClick={() => dispatch(toggle())} >
         {theme === 'light' ? <FaSun /> : <FaMoon />}
         </Button>
         {currentUser?(
-          <Dropdown arrowIcon={false} inline
+          <Dropdown arrowIcon={false} inline 
           label={<Avatar alt='user' img={currentUser.profilePicture} rounded/>}>
             <Dropdown.Header>
               <span className='block text-sm font-semibold'>{currentUser.username}</span>
