@@ -7,6 +7,10 @@ export default {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      'nunito': ['nunito', 'sans-serif'],
+      'MyFont': ['"My Font"', 'serif']
+    },
   },
   plugins: [
     require('flowbite/plugin'),

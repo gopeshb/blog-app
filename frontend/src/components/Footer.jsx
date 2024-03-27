@@ -16,7 +16,7 @@ export default function FooterCom() {
             <Footer.Icon href='#' className='text-blue-600' icon={BsLinkedin}/>
             <Footer.Icon href='#'  className='text-yellow-400' icon={SiLeetcode}/>
             <Footer.Icon href='#' className='text-green-600' icon={SiGeeksforgeeks}/>
-            <Footer.Icon href='https://github.com/gopeshb'  className='text-black' icon={BsGithub}/>
+            <Footer.Icon href='https://github.com/gopeshb'  className='text-black dark:text-white' icon={BsGithub}/>
 
           </div>
         </div>

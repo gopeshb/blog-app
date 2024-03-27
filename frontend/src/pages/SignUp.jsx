@@ -41,8 +41,8 @@ export default function SignUp() {
     <div className='min-w-screen mt-20'>
       <div className='flex p-4 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5'>
         <div className='md:flex-1 md:justify-normal flex justify-center items-center'>
-          <Link to='/' className='font-bold dark:text-white text-4xl f'>
-            <span className='p-2 bg-gradient-to-r from-cyan-600 via-sky-600 to-blue-600 font-semibold rounded-xl text-white'>
+          <Link to='/' className='font-bold text-center dark:text-white text-4xl f'>
+            <span className='p-2 font-MyFont  bg-gradient-to-r from-cyan-600 via-sky-600 to-blue-600 font-semibold rounded-xl text-white'>
               Bhai Log
             </span>
           
@@ -77,7 +77,7 @@ export default function SignUp() {
                 onChange={handleChange}
               />
             </div>
-            <Button
+            <Button className='font-semibold text-sx'
               gradientDuoTone='purpleToBlue'
               type='submit'
               disabled={loading}
