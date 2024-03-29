@@ -1,4 +1,4 @@
-import { Alert, Button, Modal,TextInput } from 'flowbite-react';
+import { Alert, Button, Label, Modal,TextInput } from 'flowbite-react';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {getDownloadURL,getStorage,ref,uploadBytesResumable} from 'firebase/storage';
@@ -152,20 +152,13 @@ export default function DashProfile() {
     }
   };
   return (
-    <div className='max-w-lg mx-auto p-3 w-full'>
-      <h1 className='my-7 text-center font-semibold text-3xl'>Profile</h1>
-      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-        <input
-          type='file'
-          accept='image/*'
-          onChange={handleImageChange}
-          ref={filePickerRef}
-          hidden
-        />
+    <div className='max-w-lg mx-auto p-4 w-full'>
+      <h1 className='my-5 text-center font-semibold text-2xl'>Profile</h1>
+      <form onSubmit={handleSubmit} className='flex flex-col gap-2 '>
+        <input type='file' accept='image/*' onChange={handleImageChange} ref={filePickerRef} hidden />
         <div
           className='relative w-32 h-32 self-center cursor-pointer shadow-md overflow-hidden rounded-full'
-          onClick={() => filePickerRef.current.click()}
-        >
+          onClick={() => filePickerRef.current.click()} >
           {imageFileUploadProgress && (
             <CircularProgressbar
               value={imageFileUploadProgress || 0}
@@ -180,9 +173,13 @@ export default function DashProfile() {
                   left: 0,
                 },
                 path: {
-                  stroke: `rgba(62, 152, 199, ${
-                    imageFileUploadProgress / 100
-                  })`,
+                  stroke: `rgba(68, 132, 149, ${imageFileUploadProgress / 100})`,
+                },
+                text: {
+                  fill: '#fffff4', 
+                  fontSize: '20px',
+                  dominantBaseline: 'middle', 
+                  textAnchor: 'middle', 
                 },
               }}
             />
@@ -196,44 +193,43 @@ export default function DashProfile() {
         </div>
         {imageFileUploadError && (
           <Alert color='failure'>{imageFileUploadError}</Alert>)}
-        <TextInput type='text' id='username'
+        <Label value='Username' className='font-semibold text-sm' />
+        <TextInput type='text' className='font-semibold text-sm' id='username'
           placeholder='username'
           defaultValue={currentUser.username}
           onChange={handleChange}/>
-        <TextInput type='email' id='email'
+          <Label value='Email' className='font-semibold text-sm' />
+        <TextInput type='email' className='font-semibold text-sm' id='email'
           placeholder='email'
           defaultValue={currentUser.email} onChange={handleChange}/>
-        <TextInput type='password' id='password' placeholder='password' onChange={handleChange}/>
-        <Button type='submit' gradientDuoTone='purpleToBlue' outline disabled={loading || imageFileUploading}>
+          <Label value='Password' className='font-semibold text-sm' />
+        <TextInput type='password' className='font-semibold text-sm' id='password' placeholder='password' onChange={handleChange}/>
+        <Button type='submit' className='font-bold' gradientDuoTone='purpleToBlue'  disabled={loading || imageFileUploading}>
           {loading ? 'Loading...' : 'Update'}
         </Button>
         {currentUser.isAdmin && (
           <Link to={'/create-post'}>
-            <Button
-              type='button'
-              gradientDuoTone='purpleToPink'
-              className='w-full'
-            >
+            <Button type='button' gradientDuoTone='purpleToPink' className='w-full' >
               Create a post
             </Button>
           </Link>
         )}
       </form>
-      <div className='text-red-500 flex justify-between mt-5'>
-        <span onClick={() => setShowModal(true)} className='cursor-pointer'>
+      <div className='text-red-500 flex justify-between mt-3'>
+        <span onClick={() => setShowModal(true)} className='cursor-pointer text-sm font-semibold'>
           Delete Account
         </span>
-        <span onClick={handleSignout} className='cursor-pointer'>
+        <span onClick={handleSignout} className='cursor-pointer text-sm font-semibold'>
           Sign Out
         </span>
       </div>
       {updateUserSuccess && (
-        <Alert color='success' className='mt-5'>
+        <Alert color='success' className='mt-5 font-semibold'>
           {updateUserSuccess}
         </Alert>
       )}
       {updateUserError && (
-        <Alert color='failure' className='mt-5'>
+        <Alert color='failure' className='mt-5 dont-semibold'>
           {updateUserError}
         </Alert>
       )}
@@ -242,12 +238,7 @@ export default function DashProfile() {
           {error}
         </Alert>
       )}
-      <Modal
-        show={showModal}
-        onClose={() => setShowModal(false)}
-        popup
-        size='md'
-      >
+      <Modal show={showModal} onClose={() => setShowModal(false)} popup size='md' >
         <Modal.Header />
         <Modal.Body>
           <div className='text-center'>
@@ -257,10 +248,10 @@ export default function DashProfile() {
             </h3>
             <div className='flex justify-center gap-4'>
               <Button color='failure' onClick={handleDeleteUser}>
-                Yes, I'm sure
+                Yes
               </Button>
               <Button color='gray' onClick={() => setShowModal(false)}>
-                No, cancel
+                No
               </Button>
             </div>
           </div>

@@ -17,23 +17,19 @@ export const updateUser = async (req, res, next) => {
     req.body.password = bcryptjs.hashSync(req.body.password, 10);
   }
   if (req.body.username) {
-    if (req.body.username.length < 7 || req.body.username.length > 20) {
-      return next(
-        errorHandler(400, 'Username must be between 7 and 20 characters')
-      );
+    const preuser = await User.findOne({ username: req.body.username });
+    if (preuser && preuser.id !== req.params.userId) {
+      return next(errorHandler(400, 'This username is already taken. Please try using another.'));
     }
-    if (req.body.username.includes(' ')) {
-      return next(errorHandler(400, 'Username cannot contain spaces'));
+}
+
+if (req.body.email) {
+    const preuser = await User.findOne({ email: req.body.email });
+    if (preuser && preuser.id !== req.params.userId) {
+      return next(errorHandler(400, 'This email is already registered.'));
     }
-    if (req.body.username !== req.body.username.toLowerCase()) {
-      return next(errorHandler(400, 'Username must be lowercase'));
-    }
-    if (!req.body.username.match(/^[a-zA-Z0-9]+$/)) {
-      return next(
-        errorHandler(400, 'Username can only contain letters and numbers')
-      );
-    }
-  }
+}
+
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.userId,
